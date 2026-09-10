@@ -4,7 +4,6 @@ on:
   # Manual trigger for the workflow
   workflow_dispatch:
 
-
 jobs:
 
   # =========================================================
@@ -91,7 +90,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-            - name: Run tests
+      - name: Run tests
         working-directory: ${{ matrix.service }}
         run: |
           pytest -v
@@ -128,17 +127,11 @@ jobs:
   # =========================================================
   # Build and Push Docker Images
   # =========================================================
-
-
-  # =========================================================
-  # Build and Push Docker Images
-  # =========================================================
   build-and-push:
     name: Build and Push ${{ matrix.image }}
     runs-on: ubuntu-latest
 
-    # All backend tests must pass before this job starts
-        # All backend and frontend tests must pass before this job starts
+    # Both backend and frontend tests must pass before this job starts
     needs:
       - backend-test
       - frontend-test
